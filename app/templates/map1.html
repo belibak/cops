@@ -19,8 +19,17 @@
         var actualProvider = new ymaps.traffic.provider.Actual({}, {infoLayerShown: true});
         actualProvider.setMap(myMap);
 
-        {% for block in lst %}
-            {{ block|safe }}
+        {% for block in lst2 %}
+
+            pl{{ block.id }} = new ymaps.Placemark([{{ block.lat }}, {{ block.lon }}], {
+                        balloonContent: '{{ block.comment }} {{ block.time_ago }}',
+                        iconContent: "{{ block.name }}",
+                    }, {
+                        preset: 'islands#redStretchyIcon',
+                        iconImageSize: [10, 30],
+                    });
+                    myMap.geoObjects.add(pl{{ block.id }});
+
         {% endfor %}
     }
     </script>
@@ -39,6 +48,12 @@
 </head>
 <body>
   <div id="map"></div>
-{{ lst2 }}
+
+
+{% for block in lst2 %}
+
+        {{ block.lon }}
+
+        {% endfor %}
 </body>
 </html>

@@ -4,6 +4,7 @@ import datetime
 
 from app import app
 from app import getpoints
+from app import Points
 
 def set_title():
     dt = datetime.datetime.now()
@@ -28,6 +29,10 @@ def set_points():
         lst.append(string)
     return lst
 
+def database_set_points(limit):
+    p = Points.query.order_by(-Points.id).limit(limit).all()
+    return p
+
 @app.after_request
 def add_header(response):
     response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
@@ -41,9 +46,11 @@ def map():
     title = set_title()
     lst = set_points()
     title = len(lst)
-    return render_template("map.html",
+    lst2 = database_set_points(title)
+    return render_template("map1.html",
                            lst = lst,
-                           title=title)
+                           title=title,
+                           lst2=lst2)
 
 if __name__ == '__main__':
     app.run()
