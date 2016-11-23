@@ -32,7 +32,7 @@ def get_dct(string = get_xml_string()):
         points['%04d'%id] = {'name' : name, 'comment' : comment, 'long' : long, 'lat' : lat, 'time' : time, 'idcat' : idcat}
         ddb = Points(lat, long, name, comment, idcat, time)
         db.session.add(ddb)
-    db.session.commit()
+        db.session.commit()
     return points
 
 
