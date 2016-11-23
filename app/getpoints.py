@@ -10,7 +10,7 @@ def set_url_list():
     tl_lat, br_lat = 54.0, 53.7
     tl_lon, br_lon = 27.2, 27.8
     urls = []
-    for i in range(9,17):
+    for i in range(6,13):
         zoom = i
         url = "http://mobile.navi.yandex.net/userpoi/getpoints?uuid=&scalefactor=1.50&zoom=%s&tl_lat=%s&tl_lon=%s&br_lat=%s&br_lon=%s&catlist=1,2,3,4,5,6&ver=2&utf&lang=ru-RU" %(zoom, tl_lat, tl_lon, br_lat, br_lon)
         urls.append(url)
