@@ -4,20 +4,19 @@ RUN adduser white --shell /bin/bash --disabled-password --gecos "" && chown whit
 
 RUN apt-get update&& apt-get -y install\
   python3\
-  nginx\
   virtualenv\
   supervisor
 
-ADD python /cops
+ADD cops /cops
 
 RUN virtualenv --python=python3 /venv
+RUN /venv/bin/pip install -r /cops/requirements.txt
 
-RUN ls /cops -alh
-RUN cp /cops/docker-confs/nginx.* /etc/nginx/sites-enabled/\
-  && cp /cops/docker-confs/supervisor.* /etc/supervisor/conf.d/
+#RUN cp /cops/docker-confs/nginx.cops.conf /etc/nginx/sites-enabled/default\
+#  && cp /cops/docker-confs/supervisor.* /etc/supervisor/conf.d/
+#
+#RUN update-rc.d supervisor enable && update-rc.d nginx enable
 
-RUN update-rc.d supervisor enable
-
-CMD ['/venv/bin/python','/cops/run.py']
+CMD ["/bin/bash", "/cops/docker.sh"]
 
 EXPOSE 80

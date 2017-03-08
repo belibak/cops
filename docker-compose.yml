@@ -1,0 +1,19 @@
+version: "2"
+services:
+  flask:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: "cops"
+    ports: 
+     - "5000:5000"
+  nginx:
+    image: nginx:latest
+    volumes:
+      - "./confs:/etc/nginx/conf.d"
+    #command: ls /etc/nginx/conf.d
+    ports:
+      # machine:container 
+      - "83:80"
+    links:
+      - "flask"
