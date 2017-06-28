@@ -12,6 +12,7 @@ def set_title():
     return title
 
 def set_points():
+    print("try to take dct")
     dct = getpoints.get_dct()
     #print(dct['0006']['lat'])
     lst = []
@@ -54,3 +55,4 @@ def map():
 
 if __name__ == '__main__':
     app.run()
+    print(set_points())

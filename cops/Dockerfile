@@ -9,7 +9,7 @@ RUN apt-get update&& apt-get -y install\
 
 ADD python /cops
 
-RUN virtualenv --python=python3 /venv
+RUN virtualenv --python=python3 /venv &&
 
 RUN ls /cops -alh
 RUN cp /cops/docker-confs/nginx.* /etc/nginx/sites-enabled/\

@@ -1,3 +1,5 @@
+import asyncio
+import aiohttp
 import requests
 from xml.etree import ElementTree
 
@@ -27,7 +29,7 @@ def get_xml_string():
     return strings
 
 def get_dct():
-    strings = get_xml_string()
+    strings = run()
     points = {}
     for string in strings:
         root = ElementTree.fromstring(string)
@@ -45,7 +47,28 @@ def get_dct():
             db.session.commit()
     return points
 
+async def gettext(url):
+	async with aiohttp.ClientSession() as session:
+		async with session.get(url) as resp:
+			return await resp.text()
+
+
+async def getsources(lst = set_url_list()):
+	res = []
+	urls = [gettext(i) for i in lst]
+	completed, pending = await asyncio.wait(urls)
+	for comp in completed:
+		res.append(comp.result())
+	return res
+
+def run():
+	loop = asyncio.new_event_loop()
+	asyncio.set_event_loop(loop)
+	cars_src = loop.run_until_complete(getsources())
+	loop.close()
+	return cars_src
+
 
 if __name__ == "__main__":
-    dct = get_dct()
-    print(len(dct))
+	dct = get_dct()
+	print(dct)
