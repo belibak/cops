@@ -41,8 +41,12 @@ def get_dct():
             long = att['lon']
             lat = att['lat']
             idcat = att['catidx']
-            points['%04d'%id] = {'name' : name, 'comment' : comment, 'long' : long, 'lat' : lat, 'time' : time, 'idcat' : idcat}
-            ddb = Points(lat, long, name, comment, idcat, time)
+            if "Камера контроля скорости" in name:
+                is_camera = True
+            else:
+                is_camera = False
+            points['%04d'%id] = {'name' : name, 'comment' : comment, 'long' : long, 'lat' : lat, 'time' : time, 'idcat' : idcat, 'is_camera' : is_camera}
+            ddb = Points(lat, long, name, comment, idcat, time, is_camera)
             db.session.add(ddb)
             db.session.commit()
     return points
@@ -71,4 +75,5 @@ def run():
 
 if __name__ == "__main__":
 	dct = get_dct()
-	print(dct)
+	for i, v in dct.items():
+		print(i, v)

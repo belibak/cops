@@ -32,6 +32,7 @@ def set_points():
 
 def database_set_points(limit):
     p = Points.query.order_by(-Points.id).limit(limit).all()
+    print(p)
     return p
 
 @app.after_request
