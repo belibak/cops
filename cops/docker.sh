@@ -1,6 +1,6 @@
 #!/bin/bash
 
-/venv/bin/python /cops/run.py
+python /cops/run.py
 
 #service supervisor start
 #service nginx start
