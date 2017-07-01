@@ -7,10 +7,15 @@ services:
     container_name: "cops"
     ports: 
      - "5000:5000"
+    volumes:
+      - "./vol:/volume" 
+     
   nginx:
     image: nginx:latest
     volumes:
       - "./confs:/etc/nginx/conf.d"
+    volumes_from:
+      - "flask"
     #command: ls /etc/nginx/conf.d
     ports:
       # machine:container 
