@@ -1,6 +1,6 @@
 #!/bin/bash
 
-/venv/bin/python /cops/run.py
+cd /cops && uwsgi --ini uwsgi.ini
 
 #service supervisor start
 #service nginx start
