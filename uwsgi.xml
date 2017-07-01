@@ -1,8 +1,0 @@
-<uwsgi>
-  <socket>/tmp/flask.sock</socket>
-  <pythonpath>/home/white/git/cops/</pythonpath>
-  <module>app:app</module>
-  <plugins>python3</plugins>
-  <virtualenv>/home/white/venvs/cops/</virtualenv>
-</uwsgi>
-
