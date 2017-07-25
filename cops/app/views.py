@@ -57,7 +57,7 @@ def map():
 
 @app.route('/get_ip')
 def print_ip():
-    return request.remote_addr
+    return request.environ['REMOTE_ADDR']
 
 if __name__ == '__main__':
     app.run()
