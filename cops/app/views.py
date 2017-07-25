@@ -1,4 +1,5 @@
 from flask import render_template
+from flask import request
 
 import datetime
 
@@ -53,6 +54,10 @@ def map():
                            lst = lst,
                            title=title,
                            lst2=lst2)
+
+@app.route('/get_ip')
+def print_ip():
+    return request.remote_addr
 
 if __name__ == '__main__':
     app.run()
