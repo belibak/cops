@@ -5,8 +5,6 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: "cops"
-    ports: 
-     - "5000:5000"
     volumes:
       - "./vol:/volume" 
      
