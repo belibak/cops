@@ -1,11 +1,14 @@
-FROM python:3.5
+FROM alpine:3.5
 
-RUN adduser white --shell /bin/bash --disabled-password --gecos "" && chown white:white /var/log -R
+RUN apk update &&\
+	apk add python3 python3-dev py3-pip gcc g++ musl-dev linux-headers
+
+RUN adduser -g "" -s /bin/sh -D white && chown white:white /var/log -R
 ADD cops/requirements.txt /tmp/requirements.txt
-RUN pip install -r /tmp/requirements.txt
+RUN pip3 install -r /tmp/requirements.txt
 
 ADD cops /cops
 
-CMD ["/bin/bash", "/cops/docker.sh"]
+RUN chown white:white /cops -R && apk del gcc g++ musl-dev linux-headers &&  cat /etc/passwd
 
-EXPOSE 80
+CMD ["/bin/sh", "/cops/docker.sh"]

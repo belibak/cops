@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     container_name: "cops"
     volumes:
-      - "./vol:/volume" 
+      - "./vol:/volume:Z" 
      
   nginx:
     image: nginx:latest
