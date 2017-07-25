@@ -55,9 +55,6 @@ def map():
                            title=title,
                            lst2=lst2)
 
-@app.route('/get_ip')
-def print_ip():
-    return request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
 
 if __name__ == '__main__':
     app.run()
