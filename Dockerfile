@@ -11,4 +11,4 @@ ADD cops /cops
 
 RUN chown white:white /cops -R && apk del gcc g++ musl-dev linux-headers &&  cat /etc/passwd
 
-CMD ["/bin/sh", "/cops/docker.sh"]
+ENTRYPOINT ["/bin/sh", "/cops/docker.sh"]
