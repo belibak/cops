@@ -5,7 +5,8 @@ RUN apk update &&\
 
 RUN adduser -g "" -s /bin/sh -D white && chown white:white /var/log -R
 ADD cops/requirements.txt /tmp/requirements.txt
-RUN pip3 install -r /tmp/requirements.txt
+RUN pip3 install --upgrade pip
+RUN pip3 install --default-timeout=100 -r /tmp/requirements.txt
 
 ADD cops /cops
 
