@@ -43,13 +43,15 @@ def get_dct():
             idcat = att['catidx']
             if "Камера контроля скорости" in name:
                 is_camera = True
-                #continue
             else:
                 is_camera = False
             point = {"id" : id + 10000, 'name' : name, 'comment' : comment, 'long' : long, 'lat' : lat, 'time' : time, 'idcat' : idcat, 'is_camera' : is_camera}
             if point['long'] not in longs:
-                points.append(point)
-            longs.append(point['long'])
+                if "Перекрытие" in point['name'] and '/' in point['name']:
+                    pass
+                else:
+                    points.append(point)
+            longs.append(long)
     return points
 
 async def gettext(url):
