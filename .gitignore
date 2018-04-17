@@ -108,8 +108,4 @@ venv.bak/
 .mypy_cache/
 
 .idea/
-confs/uwsgi.ini
-copsdjango/
-manage.py
-requirements.txt
-templates/
+
