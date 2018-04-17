@@ -1,22 +1,21 @@
-version: "2"
+version: "3"
 services:
 
-  flask:
+  django:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: "cops"
+    container_name: "copsdjango"
     volumes:
-      - "./vol:/volume:Z" 
+      - "./:/cops"
+    command: uwsgi --ini /cops/confs/uwsgi.ini
      
   nginx:
     image: nginx:latest
     volumes:
       - "./confs:/etc/nginx/conf.d"
-    volumes_from:
-      - "flask"
     ports:
       # machine:container 
       - "83:80"
     links:
-      - "flask"
+      - "django"
