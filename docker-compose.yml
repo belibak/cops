@@ -9,8 +9,11 @@ services:
     volumes:
       - "./:/cops"
     command: uwsgi --ini /cops/confs/uwsgi.ini
+    restart: always
      
   nginx:
+    depends_on:
+      - django
     image: nginx:latest
     volumes:
       - "./confs:/etc/nginx/conf.d"
@@ -19,3 +22,4 @@ services:
       - "83:80"
     links:
       - "django"
+    restart: always
