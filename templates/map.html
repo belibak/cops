@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title>{{ title }}</title>
+    <meta charset="UTF-8">
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script type="text/javascript">
+    ymaps.ready(init);
+    var myMap;
+
+    function init () {
+        myMap = new ymaps.Map('map', {
+            center: [53.905, 27.53],
+            zoom: 12
+        }, {
+            searchControlProvider: 'yandex#search'
+        });
+
+        var actualProvider = new ymaps.traffic.provider.Actual({}, {infoLayerShown: true});
+        actualProvider.setMap(myMap);
+
+        {% for block in lst %}
+            pl{{ block.id }} = new ymaps.Placemark([{{ block.lat }}, {{ block.long }}], {
+                        balloonContent: '{{ block.comment|safe}} {{ block.time|safe }} type {{ block.idcat|safe }}',
+                        iconContent: '{{ block.name }}',
+                    }, {
+                        preset: {% if block.is_camera %}'islands#blueMoneyCircleIcon'{% else %}'islands#redStretchyIcon'{% endif %},
+                        iconImageSize: [10, 30],
+                    });
+                    myMap.geoObjects.add(pl{{ block.id }});
+        {% endfor %}
+    }
+    </script>
+</head>
+<body>
+  <div id="map" style="width: 100%; height: 100%"></div>
+
+</body>
+</html>
