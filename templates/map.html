@@ -28,7 +28,10 @@
                             //iconLayout: 'default#image',
                             //iconImageHref: "{% static "radar.png" %}",
                             preset: 'islands#blueMoneyCircleIcon',
-                            iconImageSize: [30, 30],
+                            iconImageSize: [30, 30]
+                        {% elif block.idcat == "6" %}
+                            preset:  	'islands#blackStretchyIcon',
+                            iconImageSize: [10, 30]
                         {% else %}
                             preset: 'islands#redStretchyIcon',
                             iconImageSize: [10, 30],
@@ -42,6 +45,10 @@
 <body>
 <!--<img src="{% static "radar.png" %}">-->
   <div id="map" style="width: 100%; height: 100%"></div>
-
+  {% for item in lst %}
+      {% if item.idcat == "6" %}
+        {{ item }}
+      {% endif %}
+  {%  endfor %}
 </body>
 </html>

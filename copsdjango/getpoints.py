@@ -46,6 +46,7 @@ def get_dct():
             else:
                 is_camera = False
             point = {"id" : id + 10000, 'name' : name, 'comment' : comment, 'long' : long, 'lat' : lat, 'time' : time, 'idcat' : idcat, 'is_camera' : is_camera}
+            #print(point) #{'id': 10179, 'name': '27/Апр 11:39 Камера контроля скорости', 'comment': 'Камера контроля скорости', 'long': '27.7496447', 'lat': '53.9689718', 'time': 'больше дня назад', 'idcat': '2', 'is_camera': True}
             if point['long'] not in longs:
                 if "Перекрытие" in point['name'] and '/' in point['name']:
                     pass
